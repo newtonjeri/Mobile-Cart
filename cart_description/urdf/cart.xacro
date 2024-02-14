@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<robot name="cart" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:property name = "PI" value = "3.14159265359"/>
+<xacro:include filename="$(find cart_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find cart_description)/urdf/cart.trans" />
+
+<link name = "world"/>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0011074745051802052 0.010000000000065588 0.0" rpy="0 0 0"/>
+    <mass value="7.003780398889468"/>
+    <inertia ixx="0.013199" iyy="0.064626" izz="0.051893" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name = "virtual_joint" type = "fixed">
+  <origin xyz = "0 0 0" rpy = "${PI/2} 0 0"/>
+  <parent link = "world"/>
+  <child link = "base_link"/>
+</joint>
+
+<link name="wheel_v1_1">
+  <inertial>
+    <origin xyz="-1.3961054534661343e-14 1.49011606873084e-10 0.0049999999999999906" rpy="0 0 0"/>
+    <mass value="0.14618105506510462"/>
+    <inertia ixx="2.4e-05" iyy="2.4e-05" izz="4.5e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.1 -0.01 -0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="0.1 -0.01 -0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_v1_2">
+  <inertial>
+    <origin xyz="-1.3961054534661343e-14 3.469446951953614e-18 0.0049999999999999906" rpy="0 0 0"/>
+    <mass value="0.14618105506510462"/>
+    <inertia ixx="2.4e-05" iyy="2.4e-05" izz="4.5e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.12 -0.01 -0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.12 -0.01 -0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_v1_3">
+  <inertial>
+    <origin xyz="-1.3961054534661343e-14 1.49011606873084e-10 -0.0049999999999999906" rpy="0 0 0"/>
+    <mass value="0.14618105506510462"/>
+    <inertia ixx="2.4e-05" iyy="2.4e-05" izz="4.5e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.1 -0.01 0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="0.1 -0.01 0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wheel_v1_4">
+  <inertial>
+    <origin xyz="-1.3961054534661343e-14 -3.469446951953614e-18 -0.0049999999999999906" rpy="0 0 0"/>
+    <mass value="0.14618105506510462"/>
+    <inertia ixx="2.4e-05" iyy="2.4e-05" izz="4.5e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.12 -0.01 0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="steel_satin"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.12 -0.01 0.085" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://cart_description/meshes/wheel_v1_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="continuous">
+  <origin xyz="-0.1 0.01 0.085" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v1_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolute 2" type="continuous">
+  <origin xyz="0.12 0.01 0.085" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v1_2"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolute 3" type="continuous">
+  <origin xyz="-0.1 0.01 -0.085" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v1_3"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<joint name="Revolute 4" type="continuous">
+  <origin xyz="0.12 0.01 -0.085" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="wheel_v1_4"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+</robot>
